@@ -1,5 +1,6 @@
 package cryptoanalizer;
 
+import static cryptoanalizer.BruteForce.bruteForce;
 import static cryptoanalizer.Cipher.*;
 import static cryptoanalizer.utils.Scanner.scanInt;
 
@@ -18,8 +19,7 @@ public class Menu {
                 break;
             }
             case 3: {
-                System.out.println("Отличный выбор!");
-                //здесь будет brute force
+                bruteForce();
                 break;
             }
             case 4: {

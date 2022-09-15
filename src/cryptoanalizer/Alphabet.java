@@ -33,7 +33,7 @@ public class Alphabet {
                 keys[counter1] = value[i];
                 counter1++;
             }
-            for (int i = 0 -shift; i < keys.length; i++) {
+            for (int i = -shift; i < keys.length; i++) {
                 keys[counter2] = value[i];
                 counter2++;
 
@@ -72,7 +72,7 @@ public class Alphabet {
                 keys[counter1] = value[i];
                 counter1++;
             }
-            for (int i = 0 -shift; i < keys.length; i++) {
+            for (int i = -shift; i < keys.length; i++) {
                 keys[counter2] = value[i];
                 counter2++;
 
@@ -106,6 +106,22 @@ public class Alphabet {
                 System.out.println("Неожиданный выбор :) Введи собственный алфавит: не менее 3 символов, символы не должны повторяться \n" +
                         " например : абвгдеёжзийклмн ():.,)");
                 return scanString();
+            }
+            // TODO что если в меню вписывают другое число
+        }
+        return null;
+    }
+    public static String chooseBruteForceAlphabet() {
+        System.out.println("Выбери алфавит для использования: " +
+                "\n 1 - русский (АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\"\":-!?() ) " +
+                "\n 2 - английский (ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,\"\":-!? ())");
+        int chosenAlphabet = scanInt();
+        switch (chosenAlphabet) {
+            case 1: {
+                return russianAlphabet;
+            }
+            case 2: {
+                return englishAlphabet;
             }
             // TODO что если в меню вписывают другое число
         }

@@ -23,7 +23,7 @@ public class FilesPaths {
             System.out.println("Введи путь для сохранения файла");
             path = Path.of(scanString()+ "..//");
         }
-        while (checkDirectory(path) == false);
+        while (!checkDirectory(path));
         System.out.println("Введи название файла для сохранения");
         return path;
     }
@@ -34,19 +34,19 @@ public class FilesPaths {
             System.out.println("Введи путь к файлу:");
             path = Path.of(scanString());
         }
-        while (checkPath(path) == false);
+        while (!checkPath(path));
         return path.toString();
     }
 
     private static boolean checkPath(Path path)  {
-        if (Files.notExists(path) == true | Files.isRegularFile(path) == false | path.startsWith("") ==true) {
+        if (Files.notExists(path) | !Files.isRegularFile(path) | path.startsWith("")) {
             System.out.println("Введен некорректный путь к файлу");
             return false;
         }
         return true;
     }
     private static boolean checkDirectory(Path path)  {
-        if (Files.exists(path) == false | Files.isDirectory(path) == false) {
+        if (!Files.exists(path) | !Files.isDirectory(path)) {
             System.out.println("Введен некорректный путь для сохранения");
             return false;
         }
