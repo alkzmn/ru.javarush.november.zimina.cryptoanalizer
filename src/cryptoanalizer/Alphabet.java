@@ -2,6 +2,8 @@ package cryptoanalizer;
 
 import java.util.LinkedHashMap;
 
+import static cryptoanalizer.utils.Printable.CHOOSE_ALPHABET;
+import static cryptoanalizer.utils.Printable.CHOOSE_SHIFT;
 import static cryptoanalizer.utils.Scanner.scanInt;
 import static cryptoanalizer.utils.Scanner.scanString;
 
@@ -90,10 +92,7 @@ public class Alphabet {
 
 
     public static String chooseAlphabet() {
-        System.out.println("Выбери алфавит для использования: " +
-                "\n 1 - русский (АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\"\":-!?() ) " +
-                "\n 2 - английский (ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,\"\":-!? ())" +
-                "\n 3 - собственный (необходимо будет ввести свой алфавит, не менее 3 символов например : абвгдеёжзийклмн ():.,)");
+        System.out.println(CHOOSE_ALPHABET);
         int chosenAlphabet = scanInt();
         switch (chosenAlphabet) {
             case 1: {
@@ -112,9 +111,7 @@ public class Alphabet {
         return null;
     }
     public static String chooseBruteForceAlphabet() {
-        System.out.println("Выбери алфавит для использования: " +
-                "\n 1 - русский (АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\"\":-!?() ) " +
-                "\n 2 - английский (ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,\"\":-!? ())");
+        System.out.println(CHOOSE_ALPHABET);
         int chosenAlphabet = scanInt();
         switch (chosenAlphabet) {
             case 1: {
@@ -129,7 +126,7 @@ public class Alphabet {
     }
 
         private static int chooseShift (String chosenAlphabet) {
-            System.out.println("Введи величину сдвига:");
+            System.out.println(CHOOSE_SHIFT);
         int shift = scanInt();
         if (shift>chosenAlphabet.length()){
              return shift%(chosenAlphabet.length());

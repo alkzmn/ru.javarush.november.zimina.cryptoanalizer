@@ -8,6 +8,8 @@ import static cryptoanalizer.Alphabet.createEncodeAlphabet;
 import static cryptoanalizer.Menu.chooseMode;
 import static cryptoanalizer.utils.FilesPaths.createFile;
 import static cryptoanalizer.utils.FilesPaths.getFilePath;
+import static cryptoanalizer.utils.Printable.ALL_IS_DECODED;
+import static cryptoanalizer.utils.Printable.ALL_IS_ENCODED;
 import static cryptoanalizer.utils.Scanner.scanString;
 public class Cipher {
 
@@ -23,7 +25,7 @@ public class Cipher {
             }
 
         }
-        System.out.println("\nЯ все зашифровал :)");
+        System.out.println("\n"+ ALL_IS_ENCODED);
         chooseMode();
     }
     public static void decodeMessage() {
@@ -39,7 +41,7 @@ public class Cipher {
 
 
         }
-        System.out.println("\nЯ все расшифровал :)");
+        System.out.println("\n"+ALL_IS_DECODED);
         chooseMode();
 
     }
@@ -63,7 +65,7 @@ public class Cipher {
             } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Я все зашифовал, посмотри:)");
+        System.out.println(ALL_IS_ENCODED);
     }
     public static void decodeFile(){
         try (BufferedReader bufferedReader = new BufferedReader( new FileReader(getFilePath()));
@@ -85,7 +87,7 @@ public class Cipher {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Я все расшифовал, посмотри:)");
+        System.out.println(ALL_IS_DECODED);
     }
     private static String getMessageToEncode() {
         System.out.println("Введи текст для шифрования:");

@@ -1,13 +1,14 @@
 package cryptoanalizer;
 
 import static cryptoanalizer.BruteForce.bruteForce;
+import static cryptoanalizer.BruteForce.bruteForceLine;
 import static cryptoanalizer.Cipher.*;
+import static cryptoanalizer.utils.Printable.*;
 import static cryptoanalizer.utils.Scanner.scanInt;
 
 public class Menu {
     public static void chooseMode() {
-        System.out.println("Выбери режим работы: \n " +
-                "1 - Шифрование \n 2 - Дешифровка \n 3 - Взлом шифра \n 4 - Выход");
+        System.out.println(CHOOSE_MODE);
         int chosenMode = scanInt();
         switch (chosenMode) {
             case 1: {
@@ -19,12 +20,11 @@ public class Menu {
                 break;
             }
             case 3: {
-                bruteForce();
+                bruteForceLine();
                 break;
             }
             case 4: {
-                System.out.println("Возвращайся скорее!");
-
+                System.out.println(COME_BACK_SOON);
                 break;
             }
             // TODO что если в меню вписывают другое число
@@ -33,22 +33,21 @@ public class Menu {
     }
 
     private static void chooseEncodeMode() {
-        System.out.println("Выбери режим шифрования: \n " +
-                "1 - Шифрование текста из консоли \n 2 - Шифрование файла \n 3 - Выход");
+        System.out.println(CHOOSE_ENCODE_MODE);
         int chosenEncodeMode = scanInt();
         switch (chosenEncodeMode) {
             case 1: {
-                System.out.println("Отличный выбор!");
+                System.out.println(NICE_CHOICE);
                 encodeMessage();
                 break;
             }
             case 2: {
-                System.out.println("Отличный выбор!");
+                System.out.println(NICE_CHOICE);
                encodeFile();
                 break;
             }
             case 3: {
-                System.out.println("Возвращайся скорее!");
+                System.out.println(COME_BACK_SOON);
                 break;
             }
             // TODO что если в меню вписывают другое число
@@ -56,22 +55,21 @@ public class Menu {
 
     }
     private static void chooseDecodeMode() {
-        System.out.println("Выбери режим расшифровки: \n " +
-                "1 - Расшифровка текста из консоли \n 2 - Расшифровка файла \n 3 - Выход");
+        System.out.println(CHOOSE_DECODE_MODE);
         int chosenEncodeMode = scanInt();
         switch (chosenEncodeMode) {
             case 1: {
-                System.out.println("Отличный выбор!");
+                System.out.println(NICE_CHOICE);
                 decodeMessage();
                 break;
             }
             case 2: {
-                System.out.println("Отличный выбор!");
+                System.out.println(NICE_CHOICE);
                 decodeFile();
                 break;
             }
             case 3: {
-                System.out.println("Возвращайся скорее!");
+                System.out.println(COME_BACK_SOON);
                 break;
             }
             // TODO что если в меню вписывают другое число
