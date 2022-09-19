@@ -1,4 +1,4 @@
-package cryptoanalizer.utils;
+package ru.javarush.november.zimina.cryptoanalizer.utils;
 
 public class Scanner {
     public static int scanInt() {

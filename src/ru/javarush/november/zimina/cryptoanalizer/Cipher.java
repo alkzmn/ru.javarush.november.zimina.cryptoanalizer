@@ -1,17 +1,20 @@
-package cryptoanalizer;
+package ru.javarush.november.zimina.cryptoanalizer;
+
+import ru.javarush.november.zimina.cryptoanalizer.exception.WrongFilePath;
+import ru.javarush.november.zimina.cryptoanalizer.utils.Scanner;
 
 import java.io.*;
 import java.util.LinkedHashMap;
 
-import static cryptoanalizer.Alphabet.createDecodeAlphabet;
-import static cryptoanalizer.Alphabet.createEncodeAlphabet;
-import static cryptoanalizer.Menu.chooseMode;
-import static cryptoanalizer.utils.FilesPaths.createFile;
-import static cryptoanalizer.utils.FilesPaths.getFilePath;
-import static cryptoanalizer.utils.Printable.ALL_IS_DECODED;
-import static cryptoanalizer.utils.Printable.ALL_IS_ENCODED;
-import static cryptoanalizer.utils.Scanner.scanString;
+import static ru.javarush.november.zimina.cryptoanalizer.utils.Alphabet.createDecodeAlphabet;
+import static ru.javarush.november.zimina.cryptoanalizer.utils.Alphabet.createEncodeAlphabet;
+import static ru.javarush.november.zimina.cryptoanalizer.utils.Menu.chooseMode;
+import static ru.javarush.november.zimina.cryptoanalizer.utils.FilesPaths.createFile;
+import static ru.javarush.november.zimina.cryptoanalizer.utils.FilesPaths.getFilePath;
+import static ru.javarush.november.zimina.cryptoanalizer.utils.Printable.*;
+
 public class Cipher {
+    private static final String WRONG_PATH = "Неверно введен путь";
 
     public static void encodeMessage() {
         LinkedHashMap<Character, Character> createdAlphabet = createEncodeAlphabet();
@@ -19,31 +22,28 @@ public class Cipher {
         char[] messageChar = message.toCharArray();
         for (int i = 0; i < messageChar.length; i++) {
             if (createdAlphabet.containsValue(messageChar[i])) {
-                System.out.print(createdAlphabet.get(messageChar[i]));
+                printMessage(createdAlphabet.get(messageChar[i]));
             } else {
-                System.out.print(messageChar[i]);
+                printMessage(messageChar[i]);
             }
-
         }
-        System.out.println("\n"+ ALL_IS_ENCODED);
+        printMessage("\n"+ ALL_IS_ENCODED);
         chooseMode();
     }
+
     public static void decodeMessage() {
         LinkedHashMap<Character, Character> createdAlphabet = createDecodeAlphabet();
         String message = getMessageToDecode();
         char[] messageChar = message.toCharArray();
         for (int i = 0; i < messageChar.length; i++) {
             if (createdAlphabet.containsValue(messageChar[i])) {
-                System.out.print(createdAlphabet.get(messageChar[i]));
+                printMessage(createdAlphabet.get(messageChar[i]));
             } else {
-                System.out.print(messageChar[i]);
+                printMessage(messageChar[i]);
             }
-
-
         }
-        System.out.println("\n"+ALL_IS_DECODED);
+        printMessage("\n"+ALL_IS_DECODED);
         chooseMode();
-
     }
     public static void encodeFile(){
         try (BufferedReader bufferedReader = new BufferedReader( new FileReader(getFilePath()));
@@ -63,9 +63,9 @@ public class Cipher {
                 bufferedWriter.write("\n");
                 }
             } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new WrongFilePath(WRONG_PATH);
         }
-        System.out.println(ALL_IS_ENCODED);
+        printMessage(ALL_IS_ENCODED);
     }
     public static void decodeFile(){
         try (BufferedReader bufferedReader = new BufferedReader( new FileReader(getFilePath()));
@@ -85,9 +85,9 @@ public class Cipher {
                 bufferedWriter.write("\n");
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new WrongFilePath(WRONG_PATH);
         }
-        System.out.println(ALL_IS_DECODED);
+        printMessage(ALL_IS_DECODED);
     }
     public static void decodeFile(String path, int shift, String chosenAlphabet ){
         try (BufferedReader bufferedReader = new BufferedReader( new FileReader(path));
@@ -107,17 +107,17 @@ public class Cipher {
                 bufferedWriter.write("\n");
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new WrongFilePath(WRONG_PATH);
         }
-        System.out.println(ALL_IS_DECODED);
+        printMessage(ALL_IS_DECODED);
     }
     private static String getMessageToEncode() {
-        System.out.println("Введи текст для шифрования:");
-        return scanString();
+        printMessage("Введи текст для шифрования:");
+        return Scanner.scanString();
     }
     private static String getMessageToDecode() {
-        System.out.println("Введи текст для расшифровки:");
-        return scanString();
+        printMessage("Введи текст для расшифровки:");
+        return Scanner.scanString();
     }
 
 }

@@ -1,8 +1,8 @@
-package cryptoanalizer.utils;
+package ru.javarush.november.zimina.cryptoanalizer.utils;
 
 public enum Printable {
 
-    CHOOSE_MODE("Выбери режим работы: \n 1 - Шифрование \n 2 - Дешифровка \n 3 - Взлом шифра \n 4 - Выход"),
+    CHOOSE_MODE("Выбери режим работы: \n 1 - Шифрование \n 2 - Расшифровка \n 3 - Взлом шифра \n 4 - Выход"),
     COME_BACK_SOON("Возвращайся скорее!"),
     CHOOSE_ENCODE_MODE("Выбери режим шифрования: \n 1 - Шифрование текста из консоли \n 2 - Шифрование файла \n 3 - Выход"),
     CHOOSE_DECODE_MODE("Выбери режим расшифровки: \n 1 - Расшифровка текста из консоли \n 2 - Расшифровка файла \n 3 - Выход"),
@@ -24,5 +24,14 @@ public enum Printable {
     @Override
     public String toString() {
         return title;
+    }
+    public static void printMessage(Printable message){
+        System.out.println(message);
+    }
+    public static void printMessage(String message){
+        System.out.println(message);
+    }
+    public static void printMessage(Character message) {
+        System.out.println(message);
     }
 }

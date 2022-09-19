@@ -1,11 +1,6 @@
-package cryptoanalizer;
+package ru.javarush.november.zimina.cryptoanalizer.utils;
 
 import java.util.LinkedHashMap;
-
-import static cryptoanalizer.utils.Printable.CHOOSE_ALPHABET;
-import static cryptoanalizer.utils.Printable.CHOOSE_SHIFT;
-import static cryptoanalizer.utils.Scanner.scanInt;
-import static cryptoanalizer.utils.Scanner.scanString;
 
 public class Alphabet {
     public static final String RUSSIAN_ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\":-!?() ";
@@ -46,7 +41,6 @@ public class Alphabet {
         for (int i = 0; i < keys.length; i++) {
             createdAlphabet.put(keys[i], value[i]);
         }
-//        System.out.println(createdAlphabet);
         return createdAlphabet;
 
     }
@@ -85,7 +79,6 @@ public class Alphabet {
         for (int i = 0; i < keys.length; i++) {
             createdAlphabet.put(value[i], keys[i]);
         }
-//        System.out.println(createdAlphabet);
         return createdAlphabet;
 
     }
@@ -122,15 +115,14 @@ public class Alphabet {
         for (int i = 0; i < keys.length; i++) {
             createdAlphabet.put(value[i], keys[i]);
         }
-//        System.out.println(createdAlphabet);
         return createdAlphabet;
 
     }
 
 
     public static String chooseAlphabet() {
-        System.out.println(CHOOSE_ALPHABET);
-        int chosenAlphabet = scanInt();
+        Printable.printMessage(Printable.CHOOSE_ALPHABET);
+        int chosenAlphabet = Scanner.scanInt();
         switch (chosenAlphabet) {
             case 1: {
                 return RUSSIAN_ALPHABET;
@@ -139,32 +131,20 @@ public class Alphabet {
                 return ENGLISH_ALPHABET;
             }
             case 3: {
-                System.out.println("Неожиданный выбор :) Введи собственный алфавит: не менее 3 символов, символы не должны повторяться \n" +
+                Printable.printMessage("Неожиданный выбор :) Введи собственный алфавит: не менее 3 символов, символы не должны повторяться \n" +
                         " например : абвгдеёжзийклмн ():.,)");
-                return scanString();
+                return Scanner.scanString();
             }
-            // TODO что если в меню вписывают другое число
-        }
-        return null;
-    }
-    public static String chooseBruteForceAlphabet() {
-        System.out.println(CHOOSE_ALPHABET);
-        int chosenAlphabet = scanInt();
-        switch (chosenAlphabet) {
-            case 1: {
-                return RUSSIAN_ALPHABET;
-            }
-            case 2: {
+            default: {
+                Printable.printMessage("По умолчанию будет использован английский алфавит");
                 return ENGLISH_ALPHABET;
             }
-            // TODO что если в меню вписывают другое число
         }
-        return null;
     }
 
         private static int chooseShift (String chosenAlphabet) {
-            System.out.println(CHOOSE_SHIFT);
-        int shift = scanInt();
+            Printable.printMessage(Printable.CHOOSE_SHIFT);
+        int shift = Scanner.scanInt();
         if (shift>chosenAlphabet.length()){
              return shift%(chosenAlphabet.length());
         } else if (shift<-chosenAlphabet.length()) {
@@ -172,7 +152,7 @@ public class Alphabet {
 
         }
         else if (shift == 0){
-            System.out.println("Ты ввел 0, текст останется прежним");
+            Printable.printMessage("Ты ввел 0, текст останется прежним");
         }
             return shift;
         }
