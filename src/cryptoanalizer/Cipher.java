@@ -21,7 +21,7 @@ public class Cipher {
             if (createdAlphabet.containsValue(messageChar[i])) {
                 System.out.print(createdAlphabet.get(messageChar[i]));
             } else {
-                System.out.print(createdAlphabet.get(messageChar[i]));
+                System.out.print(messageChar[i]);
             }
 
         }
@@ -36,7 +36,7 @@ public class Cipher {
             if (createdAlphabet.containsValue(messageChar[i])) {
                 System.out.print(createdAlphabet.get(messageChar[i]));
             } else {
-                System.out.print(createdAlphabet.get(messageChar[i]));
+                System.out.print(messageChar[i]);
             }
 
 
@@ -71,6 +71,28 @@ public class Cipher {
         try (BufferedReader bufferedReader = new BufferedReader( new FileReader(getFilePath()));
              BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( createFile()))) {
             LinkedHashMap<Character, Character> createdAlphabet = createDecodeAlphabet();
+            while (bufferedReader.ready()) {
+                String string = bufferedReader.readLine();
+                char[] chars = string.toCharArray();
+                for (int i = 0; i < chars.length ; i++) {
+                    if (createdAlphabet.containsValue(chars[i])){
+                        bufferedWriter.write(createdAlphabet.get(chars[i]));
+                    }
+                    else {
+                        bufferedWriter.write(chars[i]);
+                    }
+                }
+                bufferedWriter.write("\n");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(ALL_IS_DECODED);
+    }
+    public static void decodeFile(String path, int shift, String chosenAlphabet ){
+        try (BufferedReader bufferedReader = new BufferedReader( new FileReader(path));
+             BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter(createFile()))) {
+            LinkedHashMap<Character, Character> createdAlphabet = createDecodeAlphabet(chosenAlphabet,shift);
             while (bufferedReader.ready()) {
                 String string = bufferedReader.readLine();
                 char[] chars = string.toCharArray();

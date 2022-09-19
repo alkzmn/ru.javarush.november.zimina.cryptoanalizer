@@ -1,5 +1,6 @@
 package cryptoanalizer.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,7 +22,7 @@ public class FilesPaths {
         Path path;
         do {
             System.out.println("Введи путь для сохранения файла");
-            path = Path.of(scanString()+ "..//");
+            path = Path.of(scanString()+ "/..//");
         }
         while (!checkDirectory(path));
         System.out.println("Введи название файла для сохранения");
@@ -39,8 +40,12 @@ public class FilesPaths {
     }
 
     private static boolean checkPath(Path path)  {
-        if (Files.notExists(path) | !Files.isRegularFile(path) | path.startsWith("")) {
+        File file = path.toFile();
+        if (Files.notExists(path) | !Files.isRegularFile(path)) {
             System.out.println("Введен некорректный путь к файлу");
+            return false;
+        } else if (file.length() == 0) {
+            System.out.println("Файл пустой,попробуй другой");
             return false;
         }
         return true;

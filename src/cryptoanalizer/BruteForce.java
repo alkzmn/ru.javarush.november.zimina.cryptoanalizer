@@ -4,77 +4,73 @@ import java.io.*;
 import java.util.LinkedHashMap;
 
 import static cryptoanalizer.Alphabet.chooseBruteForceAlphabet;
+import static cryptoanalizer.Alphabet.createDecodeAlphabet;
+import static cryptoanalizer.Cipher.decodeFile;
 import static cryptoanalizer.utils.FilesPaths.createFile;
 import static cryptoanalizer.utils.FilesPaths.getFilePath;
-import static cryptoanalizer.utils.Printable.ALL_IS_ENCODED;
+import static cryptoanalizer.utils.Scanner.scanInt;
 
 public class BruteForce {
 
     public static void bruteForce() {
+        bruteForceLine();
 
 
     }
 
     public static void bruteForceLine() {
         String chosenAlphabet = chooseBruteForceAlphabet();
-        char[] keys = chosenAlphabet.toCharArray();
-        char[] value = chosenAlphabet.toCharArray();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(getFilePath()));
-             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(createFile()))) {
+        String filePath = getFilePath();
+        try (BufferedReader bufferedReader = new BufferedReader( new FileReader(filePath))) {
             for (int i = 0; i < chosenAlphabet.length(); i++) {
                 int shift = i;
-                int counter1 = shift;
-                int counter2 = 0;
-                for (int j = 0; j < keys.length - shift; j++) {
-                    value[j] = keys[counter1];
-                    counter1++;
-                }
-                for (int k = keys.length - shift; k < keys.length; k++) {
-                    value[k] = keys[counter2];
-                    counter2++;
-                }
-                LinkedHashMap<Character, Character> createdAlphabet = new LinkedHashMap<>();
-                for (int l = 0; l < keys.length; l++) {
-                    createdAlphabet.put(value[l], keys[l]);
-                }
-                    while (bufferedReader.ready()) {
-                        String string = bufferedReader.readLine();
-                        char[] chars = string.toCharArray();
-                        for (int m = 0; m < chars.length; m++) {
-                            char[] firstLine = new char[chars.length];
-                            if (createdAlphabet.containsValue(chars[m])) {
-                                firstLine[m] = createdAlphabet.get(chars[m]);
-                                if (firstLine.toString().contains(". ") | firstLine.toString().contains(", ")
-                                        | firstLine.toString().contains(": ") | firstLine.toString().contains("! ")
-                                        | firstLine.toString().contains("? ")) {
-                                    if (createdAlphabet.containsValue(chars[m])) {
-                                        bufferedWriter.write(createdAlphabet.get(chars[m]));
-                                    } else {
-                                        bufferedWriter.write(chars[m]);
-                                    }
-                                    bufferedWriter.write("\n");
-
-                                } else break;
-
-                            } else {
-                                firstLine[m] = chars[m];
-                            }
-
-                        }
-
+                LinkedHashMap<Character, Character> createdAlphabet = createDecodeAlphabet(chosenAlphabet,i);
+                bufferedReader.mark(chosenAlphabet.length());
+                String line = bufferedReader.readLine();
+                bufferedReader.reset();
+                char[] chars = line.toCharArray();
+                char[] decodedLine = new char[chars.length];
+                for (int m = 0; m < chars.length; m++) {
+                    if (createdAlphabet.containsValue(chars[m])) {
+                        decodedLine[m] = createdAlphabet.get(chars[m]);
+                    } else {
+                        decodedLine[m] = chars[m];
                     }
-
-
-
                 }
-            } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+                if (checkDecodeLine(String.valueOf(decodedLine))) {
+                    String secondLine = bufferedReader.readLine();
+                    char[] chars2 = secondLine.toCharArray();
+                    char[] decodedSecondLine = new char[chars2.length];
+                    for (int m = 0; m < chars2.length; m++) {
+                        if (createdAlphabet.containsValue(chars2[m])) {
+                            decodedSecondLine[m] = createdAlphabet.get(chars2[m]);
+                        } else {
+                            decodedSecondLine[m] = chars2[m];
+                        }
+                    }
+                    if (checkDecodeLine(String.valueOf(decodedSecondLine))) {
+                        System.out.println("Величина сдвига:" + shift);
+                        decodeFile(filePath,shift, chosenAlphabet);
+                        break;
+                    }
+                }
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(ALL_IS_ENCODED);
     }
 
+    private static boolean checkDecodeLine(String decodedLine) {
+     if (decodedLine.contains(", ") | decodedLine.contains(". "))
+     {
+         if (!decodedLine.contains(" ъ") & !decodedLine.contains(" Ъ")& !decodedLine.contains(".Ъ")& !decodedLine.contains(".ъ")
+                 & !decodedLine.contains("\"Ъ")& !decodedLine.contains("\"ъ")& !decodedLine.contains(":Ъ")& !decodedLine.contains(":ъ")){
+             return true;
+         }
 
+      }
+        return false;
     }
+}
 
