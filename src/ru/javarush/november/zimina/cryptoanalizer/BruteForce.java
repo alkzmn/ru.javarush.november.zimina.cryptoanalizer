@@ -45,7 +45,9 @@ public class BruteForce {
      if (decodedLine.contains(", ") || decodedLine.contains(". "))
      {
          if (!decodedLine.contains(" ъ") && !decodedLine.contains(" Ъ")&& !decodedLine.contains(".Ъ")&& !decodedLine.contains(".ъ")
-                 && !decodedLine.contains("\"Ъ")&& !decodedLine.contains("\"ъ")&& !decodedLine.contains(":Ъ")&& !decodedLine.contains(":ъ")){
+                 && !decodedLine.contains("\"Ъ")&& !decodedLine.contains("\"ъ")&& !decodedLine.contains(":Ъ")&& !decodedLine.contains(":ъ")
+                 && !decodedLine.contains("-:")&& !decodedLine.contains(":.")&& !decodedLine.contains("--")&& !decodedLine.contains("(,")
+                 && !decodedLine.contains(",.")){
              return true;
          }
 
