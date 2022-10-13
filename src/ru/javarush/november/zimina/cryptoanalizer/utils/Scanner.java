@@ -5,6 +5,7 @@ public class Scanner {
         java.util.Scanner scanner = new java.util.Scanner(System.in);
         return Integer.parseInt(scanner.nextLine());
     }
+
     public static String scanString() {
         java.util.Scanner scanner = new java.util.Scanner(System.in);
         return scanner.nextLine();

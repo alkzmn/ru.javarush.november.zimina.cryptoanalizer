@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static ru.javarush.november.zimina.cryptoanalizer.utils.Printable.printMessage;
 
 public class FilesPaths {
     public static String createFile() {
@@ -23,18 +22,18 @@ public class FilesPaths {
     private static Path getPathForResult() {
         Path path;
         do {
-            printMessage("Введи путь для сохранения файла");
+            Printable.printText("Введи путь для сохранения файла");
             path = Path.of(Scanner.scanString()+ "/..//");
         }
         while (!checkDirectory(path));
-        printMessage("Введи название файла для сохранения");
+        Printable.printText("Введи название файла для сохранения");
         return path;
     }
 
     public static String getFilePath() {
         Path path;
         do {
-            printMessage("Введи путь к файлу:");
+            Printable.printText("Введи путь к файлу:");
             path = Path.of(Scanner.scanString());
         }
         while (!checkPath(path));
@@ -44,17 +43,17 @@ public class FilesPaths {
     private static boolean checkPath(Path path)  {
         File file = path.toFile();
         if (Files.notExists(path) || !Files.isRegularFile(path)) {
-            printMessage("Введен некорректный путь к файлу");
+            Printable.printText("Введен некорректный путь к файлу");
             return false;
         } else if (file.length() == 0) {
-            printMessage("Файл пустой,попробуй другой");
+            Printable.printText("Файл пустой,попробуй другой");
             return false;
         }
         return true;
     }
     private static boolean checkDirectory(Path path)  {
         if (!Files.exists(path) || !Files.isDirectory(path)) {
-            printMessage("Введен некорректный путь для сохранения");
+            Printable.printText("Введен некорректный путь для сохранения");
             return false;
         }
         return true;

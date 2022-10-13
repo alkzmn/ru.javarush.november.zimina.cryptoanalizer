@@ -3,11 +3,16 @@ package ru.javarush.november.zimina.cryptoanalizer.utils;
 import ru.javarush.november.zimina.cryptoanalizer.BruteForce;
 import ru.javarush.november.zimina.cryptoanalizer.Cipher;
 
+import java.util.LinkedHashMap;
+
+import static ru.javarush.november.zimina.cryptoanalizer.utils.Alphabet.*;
 import static ru.javarush.november.zimina.cryptoanalizer.utils.Printable.*;
 
 public class Menu {
+    private static final int ENCODE = 1;
+    private static final int DECODE = 2;
     public static void chooseMode() {
-        printMessage(CHOOSE_MODE);
+        printText(CHOOSE_MODE);
         int chosenMode = Scanner.scanInt();
         switch (chosenMode) {
             case 1: {
@@ -23,52 +28,65 @@ public class Menu {
                 break;
             }
             case 4: {
-                printMessage(COME_BACK_SOON);
+                printText(COME_BACK_SOON);
                 break;
             }
             default: break;
         }
 
     }
+
+
 
     private static void chooseEncodeMode() {
-        printMessage(CHOOSE_ENCODE_MODE);
+        String chosenAlphabet = chooseAlphabet();
+        int shift = chooseShift(chosenAlphabet);
+        LinkedHashMap<Character, Character> createdAlphabet = createAlphabet(chosenAlphabet,shift,ENCODE);
+        printText(CHOOSE_ENCODE_MODE);
         int chosenEncodeMode = Scanner.scanInt();
         switch (chosenEncodeMode) {
             case 1: {
-                printMessage(NICE_CHOICE);
-                Cipher.encodeMessage();
+                printText(NICE_CHOICE);
+                Cipher.encodeDecodeMessage(createdAlphabet);
                 break;
             }
             case 2: {
-                printMessage(NICE_CHOICE);
-               Cipher.encodeFile();
+                printText(NICE_CHOICE);
+               Cipher.encodeDecodeFile(createdAlphabet);
+                printText(ALL_IS_ENCODED);
                 break;
             }
             case 3: {
-                printMessage(COME_BACK_SOON);
+                printText(COME_BACK_SOON);
                 break;
             }
             default: break;
         }
 
     }
+
+
     private static void chooseDecodeMode() {
-        printMessage(CHOOSE_DECODE_MODE);
+        String chosenAlphabet = chooseAlphabet();
+        int shift = chooseShift(chosenAlphabet);
+        LinkedHashMap<Character, Character> createdAlphabet = createAlphabet(chosenAlphabet,shift,DECODE);
+
+        printText(CHOOSE_DECODE_MODE);
         int chosenEncodeMode = Scanner.scanInt();
         switch (chosenEncodeMode) {
             case 1: {
-                printMessage(NICE_CHOICE);
-                Cipher.decodeMessage();
+                printText(NICE_CHOICE);
+                Cipher.encodeDecodeMessage(createdAlphabet);
                 break;
             }
             case 2: {
-                printMessage(NICE_CHOICE);
-                Cipher.decodeFile();
+                printText(NICE_CHOICE);
+                Cipher.encodeDecodeFile(createdAlphabet);
+                printText(ALL_IS_DECODED);
                 break;
             }
             case 3: {
-                printMessage(COME_BACK_SOON);
+                printText(COME_BACK_SOON);
                 break;
             }
             default: break;

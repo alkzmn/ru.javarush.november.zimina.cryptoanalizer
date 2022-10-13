@@ -13,7 +13,8 @@ public enum Printable {
             "\n 3 - собственный (необходимо будет ввести свой алфавит, не менее 3 символов например : абвгдеёжзийклмн ():.,)"),
     CHOOSE_SHIFT("Введи величину сдвига:"),
     ALL_IS_ENCODED("Я все зашифровал, посмотри :)"),
-    ALL_IS_DECODED("Я все расшифровал, посмотри :)");
+    ALL_IS_DECODED("Я все расшифровал, посмотри :)"),
+    ALL_IS_READY("Все готово, посмотри :)");
 
     private final String title;
 
@@ -25,13 +26,16 @@ public enum Printable {
     public String toString() {
         return title;
     }
-    public static void printMessage(Printable message){
+    public static void printText(Printable message){
         System.out.println(message);
     }
-    public static void printMessage(String message){
+    public static void printText(String message){
         System.out.println(message);
     }
-    public static void printMessage(Character message) {
+    public static void printText(Character message) {
         System.out.println(message);
+    }
+    public static void printMessage(Character message){
+        System.out.print(message);
     }
 }
